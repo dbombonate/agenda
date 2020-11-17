@@ -1,6 +1,6 @@
 exports.paginaInicial = (req,res) => {
     res.render('index', {
-        title: 'Teste EJS'
+        title: 'Agenda de Contatos'
     })
 }
 
