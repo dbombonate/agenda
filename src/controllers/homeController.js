@@ -1,3 +1,3 @@
 exports.index = (req,res) => {
-    res.redirect('/login/index');
+    res.render('index')
 }

@@ -2,6 +2,7 @@ exports.middlewareGlobal = (req,res,next) => {
     //carrega dados nas variáveis locais da aplicação.
     res.locals.errors = req.flash('errors');
     res.locals.success = req.flash('success');
+    res.locals.user = req.session.user;
     next();
 }
 

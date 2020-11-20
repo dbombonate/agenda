@@ -15,6 +15,27 @@ class Login {
         this.errors = [];
         this.user = null;
     }
+    //Metodo de validação do login de usuario
+    async login() {
+        //recebe os dados puros do form. Se tiver erros para a execução
+        this.valida();
+        if(this.errors.length > 0) return;
+        
+        this.user = await loginModel.findOne({ email: this.body.email });
+
+        if(!this.user){
+            this.errors.push('Usuário inválido.');
+            return;
+        }
+
+        if (!bcryptjs.compareSync(this.body.password, this.user.password)){
+            this.errors.push('Senha inválida.');
+            this.user = null;
+            return;
+        }
+    }
+    
+    
     //Metodo de validação do usuario
     async register() {
         //recebe os dados puros do form. Se tiver erros para a execução
@@ -28,12 +49,8 @@ class Login {
         const salt = bcryptjs.genSaltSync();
         this.body.password = bcryptjs.hashSync(this.body.password, salt);
         //Criação do usuario na base de dados
-        try {
-            this.user = await loginModel.create(this.body);    
-        } catch (error) {
-            console.log(error);
-        };
         
+        this.user = await loginModel.create(this.body);
     }
     //Metodo de validação de usuario ja existente
     async userExists(){
