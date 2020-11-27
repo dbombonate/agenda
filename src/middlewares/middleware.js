@@ -18,3 +18,13 @@ exports.csrfMiddleware = (req, res, next) => {
 
     next();
 }
+
+//Checa se usuário está logado para acessar determinada página
+exports.loginRequired = (req, res, next) => {
+    if (!req.session.user) {
+        req.flash('errors', 'Voce precisa fazer login.');
+        req.session.save(() => res.redirect('/'));
+        return;
+    }
+    next();
+}
