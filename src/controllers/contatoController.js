@@ -39,5 +39,4 @@ exports.editIndex = async (req, res) => {
     if (!contato) return res.render('404');
 
     res.render('contato', { contato });
-    console.log(contato);
 }
