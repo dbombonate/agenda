@@ -30,7 +30,7 @@ class Contato {
         this.valida();
         if(this.errors.length > 0) return;
         //verifica se usuário informado já existe na base de dados. Se existir, retorna erro e para a execução
-        await this.userExists();
+        //await this.userExists();
 
         if(this.errors.length > 0) return;
 
@@ -38,9 +38,9 @@ class Contato {
         this.contato = await contatoModel.create(this.body);
     }
     //Metodo de validação de contato ja existente
-    async userExists(){
-        const userExist = await contatoModel.findOne({ email: this.body.email });
-        if (userExist) this.errors.push('Este contato já existe, use a função Editar.');
+    //async userExists(){
+    //    const userExist = await contatoModel.findOne({ email: this.body.email });
+    //    if (userExist) this.errors.push('Este contato já existe, use a função Editar.');
     }
     //Metodo de validação de campos do form
     valida(){
