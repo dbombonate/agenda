@@ -41,7 +41,7 @@ class Contato {
     //async userExists(){
     //    const userExist = await contatoModel.findOne({ email: this.body.email });
     //    if (userExist) this.errors.push('Este contato já existe, use a função Editar.');
-    }
+    //}
     //Metodo de validação de campos do form
     valida(){
         //trata os dados enviados no form para receber somente Strings
@@ -72,6 +72,15 @@ class Contato {
             email: this.body.email,
             telefone: this.body.telefone
         }
+    }
+
+    async edit(id){
+        if (typeof id !== "string") return;
+        //recebe os dados puros do form. Se tiver erros para a execução
+        this.valida();
+        if(this.errors.length > 0) return;
+        //Atualiza na base de dados e retorna dados atualizados no this.contato
+        this.contato = await contatoModel.findByIdAndUpdate(id, this.body, { new: true });
     }
 
 }
