@@ -24,6 +24,19 @@ class Contato {
         return contato
     }
 
+    static async buscaContatos() {
+        
+        const contatos = await contatoModel.find()
+        .sort({ criadoEm: -1 });
+        return contatos;
+    }
+
+    static async delete(id) {
+        if (typeof id !== 'string') return;
+        const contato = await contatoModel.findOneAndDelete({ _id: id });
+        return contato;
+    }
+
     //Metodo de validação do usuario
     async register() {
         //recebe os dados puros do form. Se tiver erros para a execução
@@ -37,11 +50,7 @@ class Contato {
         //Criação do contato na base de dados      
         this.contato = await contatoModel.create(this.body);
     }
-    //Metodo de validação de contato ja existente
-    //async userExists(){
-    //    const userExist = await contatoModel.findOne({ email: this.body.email });
-    //    if (userExist) this.errors.push('Este contato já existe, use a função Editar.');
-    //}
+    
     //Metodo de validação de campos do form
     valida(){
         //trata os dados enviados no form para receber somente Strings
