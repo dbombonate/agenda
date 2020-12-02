@@ -15,8 +15,13 @@
                 <tr>
                     <td><%= contato.nome %></td>
                     <td><%= contato.sobrenome %></td>
-                    <td><%= contato.telefone %></td>
-                    <td><%= contato.email %></td>
+                    <% if(contato.telefone.length > 10) {%>
+                        <td><a href="https://api.whatsapp.com/send?phone=55<%= contato.telefone %>" target="_blank"><%= contato.telefone %></a></td>
+                    <% } else { %>
+                        <td><a href="tel:<%= contato.telefone %>" target="_blank"><%= contato.telefone %></a></td>
+                    <% } %>
+                    <td><a href="mailto:<%= contato.email %>" class=""><%= contato.email %></a></td>
+                    <td><%= contato.endereco %></td>
                     <td><a href="/contato/index/<%= contato._id %>" class="">Editar</a></td>
                     <td><a class="text-danger" href="/contato/delete/<%= contato._id %>">Excluir</a></td>
                 </tr>
