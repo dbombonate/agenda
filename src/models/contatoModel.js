@@ -6,6 +6,7 @@ const contatoSchema = new mongoose.Schema({
     sobrenome: {type: String, required: false, default: ''},
     email: {type: String, required: false, default:''},
     telefone: {type: String, required: false, default: ''},
+    endereco: {type: String, required: false, default: ''},
     criadoEm: {type: Date, default: Date.now}
 });
 
@@ -79,7 +80,8 @@ class Contato {
             nome: this.body.nome,
             sobrenome: this.body.sobrenome,
             email: this.body.email,
-            telefone: this.body.telefone
+            telefone: this.body.telefone,
+            endereco: this.body.endereco
         }
     }
 
