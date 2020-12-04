@@ -11,6 +11,7 @@ export default class Login {
 
     events(){
         if (!this.form) return;
+        //Monitora se um submit está sendo enviado, previne o resultado padrão, e chama a validação
         this.form.addEventListener('submit', e => {
             e.preventDefault();
             this.validate(e);

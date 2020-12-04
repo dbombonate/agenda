@@ -105,11 +105,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
  //import './assets/css/style.css';
+//Validação de Campos
+//Página de Login de User
 
 var login = new _modules_Login__WEBPACK_IMPORTED_MODULE_2__["default"]('.form-login');
+login.init(); //Página de Cadastro de User
+
 var cadastro = new _modules_Login__WEBPACK_IMPORTED_MODULE_2__["default"]('.form-cadastro');
-login.init();
-cadastro.init();
+cadastro.init(); //Página de Cadastro de Contatos
+
 var contato = new _modules_Contato__WEBPACK_IMPORTED_MODULE_3__["default"]('.form-contato');
 contato.init();
 
@@ -152,7 +156,8 @@ var Contato = /*#__PURE__*/function () {
     value: function events() {
       var _this = this;
 
-      if (!this.form) return;
+      if (!this.form) return; //Monitora se um submit está sendo enviado, previne o resultado padrão, e chama a validação
+
       this.form.addEventListener('submit', function (e) {
         e.preventDefault();
 
@@ -162,18 +167,34 @@ var Contato = /*#__PURE__*/function () {
   }, {
     key: "validate",
     value: function validate(event) {
-      var el = event.target;
+      var el = event.target; //Campos do Form
+
+      var nomeInput = el.querySelector('input[name="nome"]');
+      var telInput = el.querySelector('input[name="telefone"]');
       var emailInput = el.querySelector('input[name="email"]');
-      var passwordInput = el.querySelector('input[name="password"]');
+      var endInput = el.querySelector('input[name="endereco"]');
       var error = false;
 
-      if (!validator__WEBPACK_IMPORTED_MODULE_0___default.a.isEmail(emailInput.value)) {
-        this.criaErro(emailInput, 'Email Inválido!');
+      if (nomeInput.value.length < 2) {
+        this.criaErro(nomeInput, 'Insira um nome.');
         error = true;
       }
 
-      if (passwordInput.value.length < 3 || passwordInput.value.length > 10) {
-        this.criaErro(passwordInput, 'Senha deve conter entre 3 e 10 caracteres.');
+      if (telInput.value.length === 0 && emailInput.value.length === 0) {
+        this.criaErro(telInput, 'Informe um telefone ou email válido.');
+        this.criaErro(emailInput, 'Informe um telefone ou email válido.');
+        error = true;
+      }
+
+      if (emailInput.value.length > 0) {
+        if (!validator__WEBPACK_IMPORTED_MODULE_0___default.a.isEmail(emailInput.value)) {
+          this.criaErro(emailInput, 'Email Inválido!');
+          error = true;
+        }
+      }
+
+      if (endInput.value.length > 0 && endInput.value.length < 5) {
+        this.criaErro(endInput, 'Informar endereço completo.');
         error = true;
       }
 
@@ -233,7 +254,8 @@ var Login = /*#__PURE__*/function () {
     value: function events() {
       var _this = this;
 
-      if (!this.form) return;
+      if (!this.form) return; //Monitora se um submit está sendo enviado, previne o resultado padrão, e chama a validação
+
       this.form.addEventListener('submit', function (e) {
         e.preventDefault();
 

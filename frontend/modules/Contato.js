@@ -1,41 +1,58 @@
 import validator from 'validator';
 
 export default class Contato {
-    constructor(formClass){
+    constructor(formClass) {
         this.form = document.querySelector(formClass);
     };
 
-    init(){
+    init() {
         this.events();
     }
 
-    events(){
+    events() {
         if (!this.form) return;
+        //Monitora se um submit está sendo enviado, previne o resultado padrão, e chama a validação
         this.form.addEventListener('submit', e => {
             e.preventDefault();
             this.validate(e);
         });
     }
 
-    validate(event){
+    validate(event) {
         const el = event.target;
+        //Campos do Form
+        const nomeInput = el.querySelector('input[name="nome"]');
+        const telInput = el.querySelector('input[name="telefone"]');
         const emailInput = el.querySelector('input[name="email"]');
-        const passwordInput = el.querySelector('input[name="password"]');
+        const endInput = el.querySelector('input[name="endereco"]');
 
         let error = false;
 
-        if (!validator.isEmail(emailInput.value)){
-            this.criaErro(emailInput, 'Email Inválido!');
+        if (nomeInput.value.length < 2) {
+            this.criaErro(nomeInput, 'Insira um nome.')
             error = true;
         }
 
-        if (passwordInput.value.length < 3 || passwordInput.value.length > 10){
-            this.criaErro(passwordInput, 'Senha deve conter entre 3 e 10 caracteres.');
+        if (telInput.value.length === 0 && emailInput.value.length === 0){
+            this.criaErro(telInput, 'Informe um telefone ou email válido.');
+            this.criaErro(emailInput, 'Informe um telefone ou email válido.');
             error = true;
         }
 
-        if(!error) el.submit();
-        
+        if (emailInput.value.length > 0){
+            if (!validator.isEmail(emailInput.value)) {
+                this.criaErro(emailInput, 'Email Inválido!');
+                error = true;
+            }
+        }
+
+        if (endInput.value.length > 0 && endInput.value.length < 5) {
+            this.criaErro(endInput, 'Informar endereço completo.');
+            error = true;
+        }
+
+        if (!error) el.submit();
+
     };
 
     criaErro(campo, msg) {
