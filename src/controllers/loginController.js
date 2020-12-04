@@ -26,7 +26,7 @@ exports.register = async (req,res) => {
     //caso não registre erros, informa mensagem de sucesso na tela e acessa a agenda
     req.flash('success', 'Seu usuário foi criado com sucesso.');
     req.session.save(function(){
-        return res.redirect('indexAgenda');
+        return res.redirect('index');
     });
     
     } catch (e) {

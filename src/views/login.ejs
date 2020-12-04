@@ -5,41 +5,40 @@
     <div class="col-lg-2"></div>
     <div class="col-lg-10 my-3">
         <h1 class="text-center">Login</h1>
-        <p class="text-center lead">Crie sua conta ou faça login para acessar</p>
 
         <%- include('includes/messages'); %>
 
         <div class="row">
 
-            <div class="col-lg">
+            <div class="col-lg my-5">
                 <h4>Crie sua conta</h4>
                 <p>Se não possui conta, informe os dados abaixo.</p>
-                <form action='/login/register' method="POST">
+                <form class="form-cadastro" action='/login/register' method="POST">
                     <input type="hidden" name="_csrf" value="<%- csrfToken %>">
                     <div class="form-group">
                       <label>Seu email:</label>
-                      <input type="email" class="form-control" name="email">
+                      <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="form-group">
                       <label>Sua senha:</label>
-                      <input type="password" class="form-control" name="password">
+                      <input type="password" class="form-control" name="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Criar conta</button>
                 </form>
             </div>
 
-            <div class="col-lg">
+            <div class="col-lg my-5">
                 <h4>Faça login</h4>
                 <p>Se já possui conta, informe seus dados para acessar.</p>
-                <form action='/login/login' method="POST">
+                <form class="form-login" action='/login/login' method="POST">
                     <input type="hidden" name="_csrf" value="<%- csrfToken %>">
                     <div class="form-group">
                       <label>Seu email:</label>
-                      <input type="email" class="form-control" name="email">
+                      <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="form-group">
                       <label>Senha:</label>
-                      <input type="password" class="form-control" name="password">
+                      <input type="password" class="form-control" name="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Acessar</button>
                 </form>
