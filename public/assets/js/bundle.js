@@ -242,6 +242,7 @@ var Login = /*#__PURE__*/function () {
     _classCallCheck(this, Login);
 
     this.form = document.querySelector(formClass);
+    this.errors = [];
   }
 
   _createClass(Login, [{

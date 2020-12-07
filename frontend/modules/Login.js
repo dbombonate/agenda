@@ -3,6 +3,7 @@ import validator from 'validator';
 export default class Login {
     constructor(formClass){
         this.form = document.querySelector(formClass);
+        this.errors = [];
     };
 
     init(){
@@ -22,19 +23,18 @@ export default class Login {
         const el = event.target;
         const emailInput = el.querySelector('input[name="email"]');
         const passwordInput = el.querySelector('input[name="password"]');
-
         let error = false;
-
+        
         if (!validator.isEmail(emailInput.value)){
             this.criaErro(emailInput, 'Email Inválido!');
             error = true;
         }
-
+        
         if (passwordInput.value.length < 3 || passwordInput.value.length > 10){
             this.criaErro(passwordInput, 'Senha deve conter entre 3 e 10 caracteres.');
             error = true;
         }
-
+        
         if(!error) el.submit();
         
     };
@@ -43,7 +43,7 @@ export default class Login {
         const divErro = document.createElement('div');
         divErro.innerHTML = msg;
         divErro.classList.add('alert-danger');
-        campo.insertAdjacentElement('afterEnd', divErro);
+        campo.insertAdjacentElement('afterEnd', divErro);  
     }
 
 }
