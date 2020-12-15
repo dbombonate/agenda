@@ -70,3 +70,25 @@ exports.logout = (req, res) => {
     req.session.destroy();
     res.redirect('index');
 }
+
+//Controller de Captcha
+exports.captcha = (req, res) => {
+   
+        if(req.body['g-recaptcha-response'] === undefined || 
+           req.body['g-recaptcha-response'] === '' || 
+           req.body['g-recaptcha-response'] === null)
+        {
+          return res.json({"responseError" : "Algo deu errado"});
+        }
+        const secretKey = process.env.secretKeyCaptcha;
+       
+        const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&amp;response=" + req.body['g-recaptcha-response'] + "&amp;remoteip=" + req.connection.remoteAddress;
+       
+        request(verificationURL,function(error,response,body) {
+          body = JSON.parse(body);
+       
+          if(body.success !== undefined &amp;&amp; !body.success) {
+            return res.json({"responseError" : "Failed captcha verification"});
+          }
+        };
+};
