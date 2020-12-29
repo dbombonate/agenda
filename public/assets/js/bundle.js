@@ -275,6 +275,11 @@ var Login = /*#__PURE__*/function () {
       var honeyPotInput = el.querySelector('input[name="tel"');
       var error = false;
 
+      if (honeyPotInput.value.length > 0) {
+        error = true;
+        console.log(honeyPotInput.value.length);
+      }
+
       if (!validator__WEBPACK_IMPORTED_MODULE_0___default.a.isEmail(emailInput.value)) {
         this.criaErro(emailInput, 'Email Inválido!');
         error = true;
@@ -282,10 +287,6 @@ var Login = /*#__PURE__*/function () {
 
       if (passwordInput.value.length < 3 || passwordInput.value.length > 10) {
         this.criaErro(passwordInput, 'Senha deve conter entre 3 e 10 caracteres.');
-        error = true;
-      }
-
-      if (honeyPotInput.value.length > 0) {
         error = true;
       }
 

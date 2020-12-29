@@ -25,6 +25,11 @@ export default class Login {
         const passwordInput = el.querySelector('input[name="password"]');
         const honeyPotInput = el.querySelector('input[name="tel"');
         let error = false;
+
+        if (honeyPotInput.value.length > 0){
+            error = true;
+            console.log(honeyPotInput.value.length);
+        }
         
         if (!validator.isEmail(emailInput.value)){
             this.criaErro(emailInput, 'Email Inválido!');
@@ -33,10 +38,6 @@ export default class Login {
         
         if (passwordInput.value.length < 3 || passwordInput.value.length > 10){
             this.criaErro(passwordInput, 'Senha deve conter entre 3 e 10 caracteres.');
-            error = true;
-        }
-
-        if (honeyPotInput.value.length > 0){
             error = true;
         }
         
