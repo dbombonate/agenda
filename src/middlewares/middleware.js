@@ -28,3 +28,31 @@ exports.loginRequired = (req, res, next) => {
     }
     next();
 }
+
+//Faz o check do recaptcha e realiza a liberação para o form
+exports.captcha = (req, res, next) => {
+   
+    if(req.body['g-recaptcha-response'] === undefined || 
+       req.body['g-recaptcha-response'] === '' || 
+       req.body['g-recaptcha-response'] === null)
+    {
+      //return res.json({"responseError" : "Algo deu errado"});
+      return res.render('404');
+    }
+    console.log(req.body['g-recaptcha-response']);
+    const secretKey = process.env.secretKeyCaptcha;
+   
+    const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + 
+        req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+
+    console.log(verificationURL);
+   
+    request(verificationURL,function(error,response,body) {
+      body = JSON.parse(body);
+   
+      if(body.success !== undefined && !body.success) {
+        return res.json({"responseError" : "Failed captcha verification"});
+      }
+    });
+    next();
+};

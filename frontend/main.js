@@ -3,9 +3,11 @@ import 'regenerator-runtime/runtime';
 
 import Login from './modules/Login';
 import Contato from './modules/Contato';
+import honeyPot from './modules/honeyPot';
 
 //import './assets/css/style.css';
 
+honeyPot();
 //Validação de Campos
 //Página de Login de User
 const login = new Login('.form-login');

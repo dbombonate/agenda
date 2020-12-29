@@ -101,11 +101,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _modules_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/Login */ "./frontend/modules/Login.js");
 /* harmony import */ var _modules_Contato__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/Contato */ "./frontend/modules/Contato.js");
+/* harmony import */ var _modules_honeyPot__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/honeyPot */ "./frontend/modules/honeyPot.js");
+
 
 
 
  //import './assets/css/style.css';
-//Validação de Campos
+
+Object(_modules_honeyPot__WEBPACK_IMPORTED_MODULE_4__["default"])(); //Validação de Campos
 //Página de Login de User
 
 var login = new _modules_Login__WEBPACK_IMPORTED_MODULE_2__["default"]('.form-login');
@@ -269,6 +272,7 @@ var Login = /*#__PURE__*/function () {
       var el = event.target;
       var emailInput = el.querySelector('input[name="email"]');
       var passwordInput = el.querySelector('input[name="password"]');
+      var honeyPotInput = el.querySelector('input[name="tel"');
       var error = false;
 
       if (!validator__WEBPACK_IMPORTED_MODULE_0___default.a.isEmail(emailInput.value)) {
@@ -278,6 +282,10 @@ var Login = /*#__PURE__*/function () {
 
       if (passwordInput.value.length < 3 || passwordInput.value.length > 10) {
         this.criaErro(passwordInput, 'Senha deve conter entre 3 e 10 caracteres.');
+        error = true;
+      }
+
+      if (honeyPotInput.value.length > 0) {
         error = true;
       }
 
@@ -297,6 +305,33 @@ var Login = /*#__PURE__*/function () {
 }();
 
 
+
+/***/ }),
+
+/***/ "./frontend/modules/honeyPot.js":
+/*!**************************************!*\
+  !*** ./frontend/modules/honeyPot.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return honeyPot; });
+function honeyPot() {
+  var ohNooClass = document.querySelectorAll('.ohhnooo');
+
+  for (var i = 0; i < ohNooClass.length; i++) {
+    var element = ohNooClass[i];
+    element.style.position = 'absolute';
+    element.style.opacity = 0;
+    element.style.top = 0;
+    element.style.left = 0;
+    element.style.height = 0;
+    element.style.width = 0;
+    element.style.zindex = -1;
+  }
+}
 
 /***/ }),
 
