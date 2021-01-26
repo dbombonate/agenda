@@ -7,14 +7,16 @@
 
         <h1 class="text-center">Agenda</h1>
         <% if(contatos.length > 0) {%>
-        <p class="text-center lead">Sua lista de contatos está abaixo</p>
+        <p class="text-center lead">Sua lista de contatos está abaixo, use os filtros de Nome, Sobrenome e Email para
+            facilitar sua procura.
+        </p>
         <%- include('includes/messages'); %>
         <div class="responsive-table-sm">
-            <table class="table table-hover my-3">
-                <th>Nome</th>
-                <th>Sobrenome</th>
+            <table class="table table-hover my-3" id="listaContatos">
+                <th>Nome<div><input id="filtro-nome"/></div></th>
+                <th>Sobrenome<div><input id="filtro-sobrenome"/></div></th>
                 <th>Tel/Cel</th>
-                <th>Email</th>
+                <th>Email<div><input id="filtro-email"/></div></th>
                 <th>Endereço</th>
                 <th></th>
                 <th></th>
