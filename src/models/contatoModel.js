@@ -28,7 +28,7 @@ class Contato {
     static async buscaContatos() {
         
         const contatos = await contatoModel.find()
-        .sort({ criadoEm: -1 });
+        .sort({ nome: 'asc' });
         return contatos;
     }
 
