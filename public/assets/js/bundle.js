@@ -107,6 +107,55 @@ __webpack_require__.r(__webpack_exports__);
 
 
  //import './assets/css/style.css';
+// Filtro de Campos na Agenda
+
+window.onload = function () {
+  var qtdContatos = document.getElementById('qtdContatos');
+
+  if (qtdContatos.value > 10) {
+    //para nomes
+    var filtroNome = document.getElementById('filtro-nome');
+    var tabelaNome = document.getElementById('listaContatos');
+
+    filtroNome.onkeyup = function () {
+      var nomeFiltro = filtroNome.value;
+
+      for (var i = 1; i < tabelaNome.rows.length; i++) {
+        var conteudoCelula = tabelaNome.rows[i].cells[0].innerText;
+        var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
+        tabelaNome.rows[i].style.display = corresponde ? '' : 'none';
+      }
+    }; //para sobrenomes
+
+
+    var filtroSobrenome = document.getElementById('filtro-sobrenome');
+    var tabelaSobrenome = document.getElementById('listaContatos');
+
+    filtroSobrenome.onkeyup = function () {
+      var nomeFiltro = filtroSobrenome.value;
+
+      for (var i = 1; i < tabelaSobrenome.rows.length; i++) {
+        var conteudoCelula = tabelaSobrenome.rows[i].cells[1].innerText;
+        var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
+        tabelaSobrenome.rows[i].style.display = corresponde ? '' : 'none';
+      }
+    }; //para email
+
+
+    var filtroEmail = document.getElementById('filtro-email');
+    var tabelaEmail = document.getElementById('listaContatos');
+
+    filtroEmail.onkeyup = function () {
+      var nomeFiltro = filtroEmail.value;
+
+      for (var i = 1; i < tabelaEmail.rows.length; i++) {
+        var conteudoCelula = tabelaEmail.rows[i].cells[3].innerText;
+        var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
+        tabelaEmail.rows[i].style.display = corresponde ? '' : 'none';
+      }
+    };
+  }
+};
 
 Object(_modules_honeyPot__WEBPACK_IMPORTED_MODULE_4__["default"])(); //Validação de Campos
 //Página de Login de User

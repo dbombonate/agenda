@@ -6,6 +6,7 @@
     <div class="col-lg-10 my-3">
 
         <h1 class="text-center">Agenda</h1>
+        <input type="hidden" name="qtdContatos" id="qtdContatos" value="<%=contatos.length%>">
         <% if(contatos.length > 0) {%>
         <p class="text-center lead">Sua lista de contatos está abaixo, use os filtros de Nome, Sobrenome e Email para
             facilitar sua procura.
@@ -13,13 +14,24 @@
         <%- include('includes/messages'); %>
         <div class="responsive-table-sm">
             <table class="table table-hover my-3" id="listaContatos">
-                <th>Nome<div><input id="filtro-nome"/></div></th>
-                <th>Sobrenome<div><input id="filtro-sobrenome"/></div></th>
-                <th>Tel/Cel</th>
-                <th>Email<div><input id="filtro-email"/></div></th>
-                <th>Endereço</th>
-                <th></th>
-                <th></th>
+                <% if(contatos.length > 10) {%>    
+                    <th>Nome<div><input id="filtro-nome"/></div></th>
+                    <th>Sobrenome<div><input id="filtro-sobrenome"/></div></th>
+                    <th>Tel/Cel</th>
+                    <th>Email<div><input id="filtro-email"/></div></th>
+                    <th>Endereço</th>
+                    <th></th>
+                    <th></th>
+                <% } else { %>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Tel/Cel</th>
+                    <th>Email</th>
+                    <th>Endereço</th>
+                    <th></th>
+                    <th></th>
+                <% } %>
+
             <% contatos.forEach(contato => { %>
                 <tr>
                     <td><%= contato.nome %></td>
